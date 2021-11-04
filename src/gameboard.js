@@ -48,33 +48,33 @@ class Gameboard {
     ship.type = typeShip;
     ship.coordinates = []
     this.ships.push(ship);
-    console.log(this.ships);
     if (align === 'vertical') {
       for (let i = 0; i < length; i++) {
         ship.coordinates.push({'row': yPosition, 'column': xPosition})
         this.gameBoard[yPosition][xPosition] = typeShip;
         yPosition += 1;
-        console.table(this.gameBoard);
       }
     } else if (align === 'horizontal') {
       for (let i = 0; i < length; i++) {
         ship.coordinates.push({'row': yPosition, 'column': xPosition})
         this.gameBoard[yPosition][xPosition] = typeShip;
         xPosition += 1;
-        console.table(this.gameBoard);
       }
     }
     return this.gameBoard;
   }
 
-  receiveAttack(xPosition, yPosition) {
+  receiveAttack(yPosition, xPosition) {
     if (this.gameBoard[yPosition][xPosition] !== 0) {
       const typeShip = this.gameBoard[yPosition][xPosition];
 
       const ship = this.ships.find((element) => element.type === typeShip);
 
-      this.ships[0].isHit(1);
-      console.log(ship);
+      const positionHit = ship.coordinates.findIndex(coordinate => coordinate.row === yPosition && coordinate.column === xPosition)
+
+      ship.isHit(positionHit);
+
+      return positionHit
     }
   }
 }

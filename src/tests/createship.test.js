@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-const Ship = require('../ship');
+import { Ship } from '../ship'
+// const Ship = require('../ship');
 
 describe('Ship functions', () => {
   let ship;

@@ -9,7 +9,7 @@ class Ship {
     if (!this.hits.includes(number)){
       this.hits.push(number);
     }
-    return this
+    return this.hits
   }
 
   isSunk() {

@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-const Gameboard = require('../gameboard');
+import { Gameboard } from '../gameboard'
+// const Gameboard = require('../gameboard');
 
 describe('Gameboard functions', () => {
   let gameBoard = new Gameboard();
@@ -42,21 +43,10 @@ describe('Gameboard functions', () => {
 
   const gameBoardTestHit = new Gameboard();
 
-  gameBoardTestHit.gameBoard = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 'battleship', 'battleship', 'battleship', 'battleship', 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  ];
 
-  gameBoardTestHit.ships = [{ length: 4, hits: [], type: 'battleship' }]
+
+  gameBoardTestHit.placeShip('battleship', 3, 1, 'horizontal')
   test('Hit a ship', () => {
-    expect(gameBoardTestHit.receiveAttack(3, 1)).toStrictEqual([1]);
+    expect(gameBoardTestHit.receiveAttack(1, 4)).toBe(gameBoardTestHit.ships[0].hits[0]);
   });
 });
