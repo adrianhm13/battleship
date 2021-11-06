@@ -10,7 +10,7 @@ describe('Ship functions', () => {
   });
 
   test('Create a ship with a specific length', () => {
-    expect(ship).toEqual({ length: 4, hits: [] });
+    expect(ship).toEqual({ length: 4, hits: [], sunk: false });
   });
 
   test('Hits a ship with the position', () => {
@@ -23,7 +23,7 @@ describe('Ship functions', () => {
       ship.isHit(2);
       ship.isHit(3);
       ship.isHit(4);
-      expect(ship.isSunk()).toBe(true)
+      expect(ship.sunk).toBe(true)
   });
 
   test('Hitting a spot multiples times', () => {

@@ -18,6 +18,7 @@ class Gameboard {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
     this.ships = [];
+    this.missedShots = [];
   }
 
   placeShip(typeShip, xPosition, yPosition, align) {
@@ -46,17 +47,17 @@ class Gameboard {
     }
     const ship = new Ship(length);
     ship.type = typeShip;
-    ship.coordinates = []
+    ship.coordinates = [];
     this.ships.push(ship);
     if (align === 'vertical') {
       for (let i = 0; i < length; i++) {
-        ship.coordinates.push({'row': yPosition, 'column': xPosition})
+        ship.coordinates.push({ row: yPosition, column: xPosition });
         this.gameBoard[yPosition][xPosition] = typeShip;
         yPosition += 1;
       }
     } else if (align === 'horizontal') {
       for (let i = 0; i < length; i++) {
-        ship.coordinates.push({'row': yPosition, 'column': xPosition})
+        ship.coordinates.push({ row: yPosition, column: xPosition });
         this.gameBoard[yPosition][xPosition] = typeShip;
         xPosition += 1;
       }
@@ -67,14 +68,16 @@ class Gameboard {
   receiveAttack(yPosition, xPosition) {
     if (this.gameBoard[yPosition][xPosition] !== 0) {
       const typeShip = this.gameBoard[yPosition][xPosition];
-
       const ship = this.ships.find((element) => element.type === typeShip);
-
-      const positionHit = ship.coordinates.findIndex(coordinate => coordinate.row === yPosition && coordinate.column === xPosition)
-
+      const positionHit = ship.coordinates.findIndex(
+        (coordinate) => coordinate.row === yPosition && coordinate.column === xPosition
+      );
       ship.isHit(positionHit);
-
-      return positionHit
+      return positionHit;
+    }
+    if (this.gameBoard[yPosition][xPosition] === 0) {
+      this.missedShots.push({ row: yPosition, column: xPosition });
+      return this.missedShots;
     }
   }
 }

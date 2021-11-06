@@ -2,6 +2,7 @@ class Ship {
   constructor(length) {
     this.length = length;
     this.hits = [];
+    this.sunk = false;
   }
 
   isHit(number) {
@@ -9,12 +10,14 @@ class Ship {
     if (!this.hits.includes(number)){
       this.hits.push(number);
     }
+    this.isSunk()
     return this.hits
   }
 
   isSunk() {
       if (this.hits.length === this.length){
-        return true;
+        this.sunk = true
+        return this.isSunk
       }
   }
 }

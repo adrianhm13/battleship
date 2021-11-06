@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Gameboard } from '../gameboard'
+import { Gameboard } from '../gameboard';
 // const Gameboard = require('../gameboard');
 
 describe('Gameboard functions', () => {
@@ -43,10 +43,21 @@ describe('Gameboard functions', () => {
 
   const gameBoardTestHit = new Gameboard();
 
-
-
-  gameBoardTestHit.placeShip('battleship', 3, 1, 'horizontal')
+  gameBoardTestHit.placeShip('battleship', 3, 1, 'horizontal');
   test('Hit a ship', () => {
-    expect(gameBoardTestHit.receiveAttack(1, 4)).toBe(gameBoardTestHit.ships[0].hits[0]);
+    gameBoardTestHit.receiveAttack(1, 3)
+    expect(gameBoardTestHit.ships[0].hits).toStrictEqual([0]);
+  });
+
+  test('Miss a shot', () => {
+    gameBoard.receiveAttack(4, 5);
+    gameBoard.receiveAttack(6, 3);
+    gameBoard.receiveAttack(2, 1);
+
+    expect(gameBoard.missedShots).toStrictEqual([
+      { row: 4, column: 5 },
+      { row: 6, column: 3 },
+      { row: 2, column: 1 },
+    ]);
   });
 });
