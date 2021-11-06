@@ -80,6 +80,10 @@ class Gameboard {
       return this.missedShots;
     }
   }
+
+  allShipsSunk() {
+    
+  }
 }
 
 export { Gameboard };

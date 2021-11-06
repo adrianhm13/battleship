@@ -60,4 +60,31 @@ describe('Gameboard functions', () => {
       { row: 2, column: 1 },
     ]);
   });
+
+  // Prepare gameboard and ships for testing if all ships are sunk
+
+  const gameBoardSunk = new Gameboard()
+
+  gameBoardSunk.placeShip('battleship', 3, 1, 'horizontal');
+  gameBoardSunk.placeShip('carrier', 3, 2, 'horizontal');
+
+  gameBoardSunk.receiveAttack(1, 3);
+  gameBoardSunk.receiveAttack(1, 4);
+  gameBoardSunk.receiveAttack(1, 5);
+  gameBoardSunk.receiveAttack(1, 6);
+
+  gameBoardSunk.receiveAttack(2, 3);
+  gameBoardSunk.receiveAttack(2, 4);
+  gameBoardSunk.receiveAttack(2, 5);
+  gameBoardSunk.receiveAttack(2, 6);
+  gameBoardSunk.receiveAttack(2, 7);
+
+
+  function checkShips(gameBoardSunks){
+      const allIsSunk = gameBoardSunks.ships.every(ship => ship.sunk === true)
+      return allIsSunk
+  }
+  test('Test all ships are sunk', () => {
+    expect(checkShips(gameBoardSunk)).toBe(true)
+  })
 });

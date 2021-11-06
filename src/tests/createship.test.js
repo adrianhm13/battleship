@@ -19,10 +19,10 @@ describe('Ship functions', () => {
   });
 
   test('Check if the ship its sunk', () => {
+      ship.isHit(0);
       ship.isHit(1);
       ship.isHit(2);
       ship.isHit(3);
-      ship.isHit(4);
       expect(ship.sunk).toBe(true)
   });
 
