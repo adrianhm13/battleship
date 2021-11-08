@@ -5,7 +5,7 @@ import { Ship } from './ship';
 class Gameboard {
   constructor() {
     this.gameBoard = [
-      // States: 0 - empty, 1 - ship, 2 - hit, 3 - missed
+      // States: 0 - empty, 1 - already attacked
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -66,23 +66,35 @@ class Gameboard {
   }
 
   receiveAttack(yPosition, xPosition) {
-    if (this.gameBoard[yPosition][xPosition] !== 0) {
-      const typeShip = this.gameBoard[yPosition][xPosition];
-      const ship = this.ships.find((element) => element.type === typeShip);
-      const positionHit = ship.coordinates.findIndex(
-        (coordinate) => coordinate.row === yPosition && coordinate.column === xPosition
-      );
-      ship.isHit(positionHit);
-      return positionHit;
-    }
-    if (this.gameBoard[yPosition][xPosition] === 0) {
-      this.missedShots.push({ row: yPosition, column: xPosition });
-      return this.missedShots;
+
+    if (!this.checkPositionAttacked(yPosition, xPosition)) {
+      if (typeof this.gameBoard[yPosition][xPosition] === 'string') {
+        const typeShip = this.gameBoard[yPosition][xPosition];
+        const ship = this.ships.find((element) => element.type === typeShip);
+        const positionHit = ship.coordinates.findIndex(
+          (coordinate) => coordinate.row === yPosition && coordinate.column === xPosition
+        );
+        ship.isHit(positionHit);
+        return positionHit;
+      }
+      this.allShipsSunk();
     }
   }
 
-  allShipsSunk() {
+  checkPositionAttacked(yPosition, xPosition) {
+    if (this.gameBoard[yPosition][xPosition] === 0) {
+      this.gameBoard[yPosition][xPosition] = 1
+      this.missedShots.push({ row: yPosition, column: xPosition });
+      return this.missedShots
+    }
+
     
+    
+  }
+
+  allShipsSunk() {
+    const allIsSunk = this.ships.every((ship) => ship.sunk === true);
+    return allIsSunk;
   }
 }
 

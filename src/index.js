@@ -1,6 +1,4 @@
-import { Ship } from './ship'
-import { Gameboard} from './gameboard'
+import { initGame } from './game'
+import './style.css'
 
-
-window.gameBoard = Gameboard
-window.ship = Ship
+initGame();

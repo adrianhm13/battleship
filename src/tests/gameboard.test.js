@@ -57,9 +57,18 @@ describe('Gameboard functions', () => {
     expect(gameBoard.missedShots).toStrictEqual([
       { row: 4, column: 5 },
       { row: 6, column: 3 },
-      { row: 2, column: 1 },
+      { row: 2, column: 1 }
     ]);
   });
+
+  // Prepare gameboard for attack in the same square
+  const gameBoardTwice = new Gameboard()
+  gameBoardTwice.receiveAttack(1, 3)
+  gameBoardTwice.receiveAttack(1, 3)
+  test('Attacking the same spot twice', () => {
+    expect(gameBoardTwice.gameBoard[1][3]).toBe(1)
+  })
+
 
   // Prepare gameboard and ships for testing if all ships are sunk
 
