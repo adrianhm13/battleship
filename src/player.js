@@ -12,7 +12,7 @@ class Player {
 
   randomMove(enemyGameboard) {
     const min = 0;
-    const max = 11;
+    const max = 10;
 
     const yPosition = Math.floor(Math.random() * (max - min) + min);
     const xPosition = Math.floor(Math.random() * (max - min) + min);

@@ -84,6 +84,7 @@ class Gameboard {
   checkPositionAttacked(yPosition, xPosition) {
     if (this.gameBoard[yPosition][xPosition] === 0) {
       this.gameBoard[yPosition][xPosition] = 1
+      console.log('works')
       this.missedShots.push({ row: yPosition, column: xPosition });
       return this.missedShots
     }
