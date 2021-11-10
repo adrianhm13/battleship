@@ -6,12 +6,14 @@ import { Render } from './dom';
 const humanPlayer = new Player('human');
 const computerPlayer = new Player('computer');
 
-const gameboardHuman = new Gameboard();
-const gameboardComputer = new Gameboard();
+const gameboardHuman = new Gameboard('human');
+const gameboardComputer = new Gameboard('computer');
 
 function initGame() {
   Render.renderGameboards();
 }
-
+function gameEnd(loser){
+  console.log(loser)
+}
 // Create function to end the game when all boats are sunk, call it from gameboard class
-export { initGame, humanPlayer, computerPlayer, gameboardHuman, gameboardComputer };
+export { initGame, humanPlayer, computerPlayer, gameboardHuman, gameboardComputer, gameEnd };

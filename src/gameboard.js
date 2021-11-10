@@ -1,9 +1,11 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 import { Ship } from './ship';
+import { gameEnd } from './game';
 
 class Gameboard {
-  constructor() {
+  constructor(player) {
+    this.player = player;
     this.gameBoard = [
       // States: 0 - empty, 1 - already attacked
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -95,6 +97,9 @@ class Gameboard {
 
   allShipsSunk() {
     const allIsSunk = this.ships.every((ship) => ship.sunk === true);
+    if(allIsSunk === true){
+      gameEnd(this.player)
+    }
     return allIsSunk;
   }
 }

@@ -36,8 +36,11 @@ class Render {
     const cellClicked = e.target;
     const yPosition = cellClicked.getAttribute('y-position');
     const xPosition = cellClicked.getAttribute('x-position');
-    humanPlayer.attackEnemy(yPosition, xPosition, gameboardComputer);
-    computerPlayer.randomMove(gameboardHuman);
+
+    if(gameboardComputer.gameBoard[yPosition][xPosition] === 0){
+      humanPlayer.attackEnemy(yPosition, xPosition, gameboardComputer);
+      computerPlayer.randomMove(gameboardHuman);
+    }
 
     console.table(gameboardHuman.gameBoard)
     console.table(gameboardComputer.gameBoard)
