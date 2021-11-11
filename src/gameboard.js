@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 import { Ship } from './ship';
@@ -69,30 +70,32 @@ class Gameboard {
 
   receiveAttack(yPosition, xPosition) {
 
-    if (!this.checkPositionAttacked(yPosition, xPosition)) {
+    if (this.checkPositionAttacked(yPosition, xPosition) === true) {
       if (typeof this.gameBoard[yPosition][xPosition] === 'string') {
         const typeShip = this.gameBoard[yPosition][xPosition];
         const ship = this.ships.find((element) => element.type === typeShip);
+        
         const positionHit = ship.coordinates.findIndex(
-          (coordinate) => coordinate.row === yPosition && coordinate.column === xPosition
+          (coordinate) => coordinate.row == yPosition && coordinate.column == xPosition
         );
+        console.log(positionHit)
+        this.gameBoard[yPosition][xPosition] = 1
         ship.isHit(positionHit);
-        return positionHit;
       }
       this.allShipsSunk();
     }
   }
 
   checkPositionAttacked(yPosition, xPosition) {
-    if (this.gameBoard[yPosition][xPosition] === 0) {
+    if (this.gameBoard[yPosition][xPosition] === 0){
+      console.log(this.gameBoard[yPosition][xPosition])
       this.gameBoard[yPosition][xPosition] = 1
-      console.log('works')
       this.missedShots.push({ row: yPosition, column: xPosition });
-      return this.missedShots
+      return false
     }
+      return true;
+    
 
-    
-    
   }
 
   allShipsSunk() {

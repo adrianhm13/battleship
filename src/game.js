@@ -9,6 +9,11 @@ const computerPlayer = new Player('computer');
 const gameboardHuman = new Gameboard('human');
 const gameboardComputer = new Gameboard('computer');
 
+gameboardHuman.placeShip('carrier', 0, 0, 'vertical')
+gameboardHuman.placeShip('battleship', 1, 0, 'vertical')
+
+gameboardComputer.placeShip('battleship', 1, 0, 'vertical')
+gameboardComputer.placeShip('carrier', 0, 0, 'vertical')
 function initGame() {
   Render.renderGameboards();
 }
