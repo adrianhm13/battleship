@@ -3,6 +3,7 @@
 /* eslint-disable no-plusplus */
 import { Ship } from './ship';
 import { gameEnd } from './game';
+import {Render } from './dom'
 
 class Gameboard {
   constructor(player) {
@@ -69,7 +70,6 @@ class Gameboard {
   }
 
   receiveAttack(yPosition, xPosition) {
-
     if (this.checkPositionAttacked(yPosition, xPosition) === true) {
       if (typeof this.gameBoard[yPosition][xPosition] === 'string') {
         const typeShip = this.gameBoard[yPosition][xPosition];
@@ -83,18 +83,20 @@ class Gameboard {
         ship.isHit(positionHit);
       }
       this.allShipsSunk();
+      Render.changeColorHit(xPosition, yPosition, this.player)
+    }else{
+      this.gameBoard[yPosition][xPosition] = 1
+      this.missedShots.push({ row: yPosition, column: xPosition });
+
+      Render.changeColorMissed(xPosition, yPosition, this.player)
     }
   }
 
   checkPositionAttacked(yPosition, xPosition) {
-    if (this.gameBoard[yPosition][xPosition] === 0){
-      console.log(this.gameBoard[yPosition][xPosition])
-      this.gameBoard[yPosition][xPosition] = 1
-      this.missedShots.push({ row: yPosition, column: xPosition });
+    if (this.gameBoard[yPosition][xPosition] == 0){
       return false
     }
       return true;
-    
 
   }
 

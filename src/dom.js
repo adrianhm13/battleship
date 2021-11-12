@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 import { Gameboard } from './gameboard';
 import { Player } from './player';
-import { humanPlayer, computerPlayer, gameboardHuman, gameboardComputer } from './game'
+import { humanPlayer, computerPlayer, gameboardHuman, gameboardComputer } from './game';
 
 class Render {
   static renderGameboards() {
@@ -12,6 +12,7 @@ class Render {
     for (let i = 0; i < gameBoard.length; i++) {
       for (let j = 0; j < gameBoard[i].length; j++) {
         const cell = document.createElement('div');
+        cell.setAttribute('player', gameboardHuman.player);
         cell.setAttribute('y-position', i);
         cell.setAttribute('x-position', j);
         cell.classList.add('cell');
@@ -21,12 +22,11 @@ class Render {
     for (let i = 0; i < gameBoard.length; i++) {
       for (let j = 0; j < gameBoard[i].length; j++) {
         const cell = document.createElement('div');
+        cell.setAttribute('player', gameboardComputer.player);
         cell.setAttribute('y-position', i);
         cell.setAttribute('x-position', j);
-        cell.addEventListener('click', (e) =>
-          this.inputAttack(e)
-        );
-        cell.classList.add('cell');
+        cell.addEventListener('click', (e) => this.inputAttack(e));
+        cell.classList.add('cell-computer');
         divComputer.appendChild(cell);
       }
     }
@@ -36,15 +36,28 @@ class Render {
     const cellClicked = e.target;
     const yPosition = cellClicked.getAttribute('y-position');
     const xPosition = cellClicked.getAttribute('x-position');
-
-    if(gameboardComputer.gameBoard[yPosition][xPosition] !== 0){
+    if (
+      typeof gameboardComputer.gameBoard[yPosition][xPosition] === 'string' ||
+      gameboardComputer.gameBoard[yPosition][xPosition] === 0
+    ) {
       humanPlayer.attackEnemy(yPosition, xPosition, gameboardComputer);
       computerPlayer.randomMove(gameboardHuman);
     }
-    console.table(gameboardComputer.gameBoard)
   }
 
-  // Create a function to change color of the cell attacked, if its miss, red, if it hits, green, for both players
+  static changeColorMissed(xPosition, yPosition, gameBoard) {
+    const cellClicked = document.querySelector(
+      `[x-position="${xPosition}"][y-position="${yPosition}"][player="${gameBoard}"]`
+    );
+    cellClicked.classList.add('missed-cell');
+  }
+
+  static changeColorHit(xPosition, yPosition, gameBoard) {
+    const cellClicked = document.querySelector(
+      `[x-position="${xPosition}"][y-position="${yPosition}"][player="${gameBoard}"]`
+    );
+    cellClicked.classList.add('hit-cell');
+  }
 }
 
 export { Render };
