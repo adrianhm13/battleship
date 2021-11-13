@@ -1,4 +1,3 @@
-import { Ship } from './ship';
 import { Gameboard } from './gameboard';
 import { Player } from './player';
 import { Render } from './dom';
@@ -21,5 +20,5 @@ function initGame() {
 function gameEnd(loser){
   console.log(loser)
 }
-// Create function to end the game when all boats are sunk, call it from gameboard class
+
 export { initGame, humanPlayer, computerPlayer, gameboardHuman, gameboardComputer, gameEnd };

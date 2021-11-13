@@ -10,10 +10,30 @@
     <div class="content">
       <div class="header"><h1>Battleship Game</h1></div>
       <div id="main-gameboard" class="main-gameboard">
-        <div id="gameboard-human" class="gameboards">
-
+        <div class="individual-gameboard">
+          <h3>Your board</h3>
+          <div id="gameboard-human" class="gameboards"></div>
         </div>
-        <div id="gameboard-computer" class="gameboards"></div>
+        <div class="info-cells">
+          <ul>
+            <li>
+              <div
+                style="border: 1px solid rgb(255, 255, 255); background-color: rgb(145, 38, 38)"
+              ></div>
+              Missed hit
+            </li>
+            <li>
+              <div
+                style="border: 1px solid rgb(255, 255, 255); background-color: rgb(168, 168, 168)"
+              ></div>
+              Hit successful
+            </li>
+          </ul>
+        </div>
+        <div class="individual-gameboard">
+          <h3>Enemy board</h3>
+          <div id="gameboard-computer" class="gameboards"></div>
+        </div>
       </div>
     </div>
 
