@@ -18,7 +18,7 @@ function initGame() {
   Render.renderGameboards();
 }
 function gameEnd(loser){
-  console.log(loser)
+  alert(`The loser is: ${loser}`)
 }
 
 export { initGame, humanPlayer, computerPlayer, gameboardHuman, gameboardComputer, gameEnd };

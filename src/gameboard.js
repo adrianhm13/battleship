@@ -53,6 +53,7 @@ class Gameboard {
     ship.type = typeShip;
     ship.coordinates = [];
     this.ships.push(ship);
+    // Add placement possible
     if (align === 'vertical') {
       for (let i = 0; i < length; i++) {
         ship.coordinates.push({ row: yPosition, column: xPosition });

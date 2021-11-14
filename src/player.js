@@ -7,7 +7,8 @@ class Player {
   }
 
   attackEnemy(yPosition, xPosition, enemyGameboard) {
-    enemyGameboard.receiveAttack(yPosition, xPosition);
+    if(enemyGameboard.receiveAttack(yPosition, xPosition)){return true}
+    return false;
   }
 
   randomMove(enemyGameboard) {

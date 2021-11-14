@@ -6,28 +6,27 @@ import { humanPlayer, computerPlayer, gameboardHuman, gameboardComputer } from '
 class Render {
   static renderGameboards() {
     const { gameBoard } = gameboardHuman;
-    console.log(gameboardHuman);
     const divHuman = document.getElementById('gameboard-human');
     const divComputer = document.getElementById('gameboard-computer');
     for (let i = 0; i < gameBoard.length; i++) {
       for (let j = 0; j < gameBoard[i].length; j++) {
-        const cell = document.createElement('div');
-        cell.setAttribute('player', gameboardHuman.player);
-        cell.setAttribute('y-position', i);
-        cell.setAttribute('x-position', j);
-        cell.classList.add('cell');
-        divHuman.appendChild(cell);
-      }
-    }
-    for (let i = 0; i < gameBoard.length; i++) {
-      for (let j = 0; j < gameBoard[i].length; j++) {
-        const cell = document.createElement('div');
-        cell.setAttribute('player', gameboardComputer.player);
-        cell.setAttribute('y-position', i);
-        cell.setAttribute('x-position', j);
-        cell.addEventListener('click', (e) => this.inputAttack(e));
-        cell.classList.add('cell-computer');
-        divComputer.appendChild(cell);
+        const cellHuman = document.createElement('div');
+        const cellComputer = document.createElement('div');
+        cellHuman.setAttribute('player', gameboardHuman.player);
+        cellHuman.setAttribute('y-position', i);
+        cellHuman.setAttribute('x-position', j);
+
+        cellComputer.setAttribute('player', gameboardComputer.player);
+        cellComputer.setAttribute('y-position', i);
+        cellComputer.setAttribute('x-position', j);
+
+        cellComputer.addEventListener('click', (e) => this.inputAttack(e));
+
+        cellHuman.classList.add('cell');
+        cellComputer.classList.add('cell-computer');
+
+        divHuman.appendChild(cellHuman);
+        divComputer.appendChild(cellComputer);
       }
     }
   }
@@ -57,6 +56,36 @@ class Render {
       `[x-position="${xPosition}"][y-position="${yPosition}"][player="${gameBoard}"]`
     );
     cellClicked.classList.add('hit-cell');
+  }
+
+  static menuPlaceShips() {
+    const shipsInfo = [
+      { type: 'carrier', length: 5 },
+      { type: 'battleship', length: 4 },
+      { type: 'destroyer', length: 3 },
+      { type: 'submarine', length: 3 },
+      { type: 'patrol', length: 2 },
+    ];
+    const { gameBoard } = gameboardHuman;
+    const divGameboard = document.getElementById('copy-gameboard');
+    for (let i = 0; i < gameBoard.length; i++) {
+      for (let j = 0; j < gameBoard[i].length; j++) {
+        const cell = document.createElement('div');
+        cell.setAttribute('y-position', i);
+        cell.setAttribute('x-position', j);
+
+        cell.addEventListener('mouseover', (e) => this.mouseOverPlacing(e, shipsInfo));
+
+        cell.classList.add('cell-computer');
+
+        divGameboard.appendChild(cell);
+      }
+    }
+  }
+  
+  static mouseOverPlacing(e, shipsInfo){
+    console.log(e)
+    console.log(shipsInfo);
   }
 }
 
