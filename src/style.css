@@ -142,11 +142,14 @@ html, body{
 }
 .cell-computer{
     border: 1px solid white;
-    cursor: pointer;
+    cursor: inherit;
 }
 .missed-cell{
     background-color: rgb(145, 38, 38);
 }
 .hit-cell{
     background-color: rgb(168, 168, 168);
+}
+.hit-forbidden{
+    cursor: not-allowed !important;
 }
