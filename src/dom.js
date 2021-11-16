@@ -78,7 +78,7 @@ class Render {
         cell.classList.add('cell-computer');
         cell.addEventListener('mouseover', (e) => this.mouseOverPlacing(e, shipsInfo));
         cell.addEventListener('mouseleave', (e) => this.mouseLeavePlacing(e, shipsInfo));
-
+        cell.addEventListener('click', (e) => {this.placeShipDom(e, shipsInfo)})
         divGameboard.appendChild(cell);
       }
     }
@@ -101,8 +101,9 @@ class Render {
     const shipLength = shipsInfo[0].length;
     let xPosition = Number(e.target.getAttribute('x-position'));
     let yPosition = Number(e.target.getAttribute('y-position'));
+    console.log(`xPosition: ${xPosition}`)
+    console.log(`yPosition: ${yPosition}`);
     for (let i = 0; i < shipLength; i++) {
-      console.log(yPosition);
       const cellHover = document.querySelector(
         `[x-position="${xPosition}"][y-position="${yPosition}"]`
       );
@@ -112,13 +113,24 @@ class Render {
         } else {
           xPosition += 1;
         }
-        cellHover.classList.toggle('hit-cell');
+        cellHover.classList.add('hit-cell');
       } else {
         const divGameboard = document.getElementById('copy-gameboard')
         divGameboard.classList.add('hit-forbidden');
-        console.log(divGameboard)
       }
     }
+  }
+
+  static placeShipDom(e, shipsInfo){
+    const xPosition = Number(e.target.getAttribute('x-position'));
+    const yPosition = Number(e.target.getAttribute('y-position'));
+    console.log(shipsInfo[0].align)
+    console.log(xPosition, yPosition)
+    if(gameboardHuman.placeShip(shipsInfo[0].type, xPosition, yPosition, shipsInfo[0].align) === true){
+      shipsInfo.shift()
+    }
+
+
   }
 
   static mouseLeavePlacing(e, shipsInfo) {

@@ -53,21 +53,33 @@ class Gameboard {
     ship.type = typeShip;
     ship.coordinates = [];
     this.ships.push(ship);
-    // Add placement possible
-    if (align === 'vertical') {
+    if(align === 'vertical'){
+      if((yPosition + length) > 10){
+        return console.log('Placement not possible due to yPosition too high')
+      }
       for (let i = 0; i < length; i++) {
+        if(typeof this.gameBoard[yPosition][xPosition] === 'string'){
+          return console.log('Placement not possible due to there is a ship already')
+        }
         ship.coordinates.push({ row: yPosition, column: xPosition });
         this.gameBoard[yPosition][xPosition] = typeShip;
         yPosition += 1;
       }
-    } else if (align === 'horizontal') {
+    }else if(align === 'horizontal'){
+      if((xPosition + length) > 10){
+        return console.log('Placement not possible due to xPosition too high')
+      }
       for (let i = 0; i < length; i++) {
+        if(typeof this.gameBoard[yPosition][xPosition] === 'string'){
+          return console.log('Placement not possible due to there is a ship already')
+        }
         ship.coordinates.push({ row: yPosition, column: xPosition });
         this.gameBoard[yPosition][xPosition] = typeShip;
         xPosition += 1;
       }
     }
-    return this.gameBoard;
+    console.table(this.gameBoard)
+    return true
   }
 
   receiveAttack(yPosition, xPosition) {
