@@ -78,7 +78,6 @@ class Gameboard {
         xPosition += 1;
       }
     }
-    console.table(this.gameBoard)
     return true
   }
 
@@ -91,7 +90,6 @@ class Gameboard {
         const positionHit = ship.coordinates.findIndex(
           (coordinate) => coordinate.row == yPosition && coordinate.column == xPosition
         );
-        console.log(positionHit)
         this.gameBoard[yPosition][xPosition] = 1
         ship.isHit(positionHit);
       }

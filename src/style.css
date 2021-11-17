@@ -145,11 +145,30 @@ html, body{
     cursor: inherit;
 }
 .missed-cell{
-    background-color: rgb(145, 38, 38);
+    background-color: rgb(168, 168, 168);
 }
 .hit-cell{
-    background-color: rgb(168, 168, 168);
+    background-color: rgb(145, 38, 38);
 }
 .hit-forbidden{
     cursor: not-allowed !important;
+}
+.hit-test{
+    background-color: rgb(46, 37, 124);
+}
+#change-align{
+    width: 100%;
+    height: 25%;
+    font-family: 'Roboto', sans-serif;
+    background-color: #bdb2ff;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+    margin-top: 25%;
+    font-size: 15px;
+    color: rgb(59, 59, 59);
+}
+#change-align:hover{
+    background-color:rgba(0, 0, 0, 0.555);
+    color: white;
 }

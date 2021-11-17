@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <div class="menu-place-ships">
+    <div class="menu-place-ships" id="main-copy-gameboard">
       <div class="menu-place-content">
         <div class="ls-mp" id="copy-gameboard"></div>
         <div class="rs-mp">
@@ -18,9 +18,10 @@
               <h3 id="type-ship">Carrier</h3>
             </div>
             <div>
-              <h3>Length:</h3><h3>5</h3>
+              <h3>Length:</h3><h3 id="length-ship">5</h3>
             </div>
-            <input type="button" id="change-align">
+            <label for="change-align"></label>
+            <input type="button" id="change-align" value="Rotate">
           </div>
         </div>
       </div>
@@ -36,13 +37,13 @@
           <ul>
             <li>
               <div
-                style="border: 1px solid rgb(255, 255, 255); background-color: rgb(145, 38, 38)"
+                style="border: 1px solid rgb(255, 255, 255); background-color: rgb(168, 168, 168)"
               ></div>
               Missed hit
             </li>
             <li>
               <div
-                style="border: 1px solid rgb(255, 255, 255); background-color: rgb(168, 168, 168)"
+                style="border: 1px solid rgb(255, 255, 255); background-color: rgb(145, 38, 38)"
               ></div>
               Hit successful
             </li>
